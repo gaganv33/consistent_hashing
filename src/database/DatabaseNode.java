@@ -35,13 +35,13 @@ public class DatabaseNode {
         return container.get(key);
     }
 
-    public synchronized void scalingDown() {
+    public void scalingDown() {
         System.out.printf("[%s].%s: Scaling down database: %s\n", Thread.currentThread().getStackTrace()[1], name, true);
         this.isAlive = false;
         messageQueue.produce(new Message(name, false));
     }
 
-    public synchronized void scalingUp() {
+    public void scalingUp() {
         System.out.printf("[%s] %s: Scaling up database: %s\n", Thread.currentThread().getStackTrace()[1], name, true);
         this.isAlive = true;
         messageQueue.produce(new Message(name, true));
